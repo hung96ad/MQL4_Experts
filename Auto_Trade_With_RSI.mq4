@@ -99,15 +99,23 @@ int start()
                    +rsi7+rsi8+rsi9+rsi10+rsi11+rsi12
                    +rsi13+rsi14+rsi15+rsi16+rsi17+rsi18+rsi19+rsi20)
    /21;
-   bool check_rsi = check_rsi(rsi0);
-   if(OpenSELL && check_rsi == true)
+   int check_rsi = check_rsi(rsi0);
+   if(OrderBuy<1 && OrderSell==0 && check_rsi == 1)
+   {
+     OPBUY();
+   }
+   if(OrderSell<1 && OrderBuy==0 && check_rsi == 2)
+   {
+     OPSELL();
+   }
+   if(OpenSELL && check_rsi == 0)
      {
       if(OrderSell<1 && OrderBuy==0 && Tot_RSI<45)
         {
          OPSELL();
         }
      }
-   if(OpenBUY && check_rsi == true)
+   if(OpenBUY && check_rsi == 0)
      {
       if(OrderBuy<1 && OrderSell==0 && Tot_RSI>55)
         {
@@ -214,10 +222,13 @@ double LOT()
   }
 //+------------------------------------------------------------------+
 
-bool check_rsi(double rsi)
+int check_rsi(double rsi)
 {
-  if (rsi<20 || rsi > 80){
-    return (false);
+  if (rsi<25){
+    return (1);//buy
   }
-  return (true);
+  if (rsi > 75){
+    return (2);//sell
+  }
+  return (0);
 }
