@@ -16,8 +16,8 @@ input double ManualLots=0.05;
 input double MaxLots=0.05;
 input bool   AutoLot=True;
 input double Risk=5;
-input double StopLoss=0;
-input double TakeProfit=100;
+input double StopLoss=280;
+input double TakeProfit=70;
 input bool   CloseBySignal=True;
 input double TrailingStop=0;
 input int    Slippage=10;
@@ -218,6 +218,7 @@ double LOT()
 //---
    if(lotsi>=ilot_max) { lotsi=ilot_max; }
 //---
+  if (lotsi < ilot_min) lotsi=ilot_min;
    return(lotsi);
   }
 //+------------------------------------------------------------------+
