@@ -31,3 +31,6 @@
 *.out
 *.app
 *.ex4
+
+# Cahes
+*.dat
